@@ -177,7 +177,7 @@ function forward_Callback(hObject, eventdata, handles)
 %end
 %plot(handles.mapPlot, valCols,keyRows,  'ko')
 global diagram
-%disp(diagram)
+disp(diagram)
 startX = str2double(get(handles.x1, 'String'));
 startY = str2double(get(handles.y1, 'String'));
 diagram(startY, startX) = 2;
@@ -288,6 +288,6 @@ grid on;
 axis(handles.mapPlot, [1 mapwidth 1 mapheight])
 set(handles.mapPlot, 'XTick', (1:mapwidth), 'YTick', (1:mapheight))
 diagram = csvread(filename);
-imagesc(handles.mapPlot,diagram);
+imagesc(handles.mapPlot,flipud(diagram));
 
 
