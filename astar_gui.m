@@ -262,8 +262,8 @@ function loadmap_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 global diagram
-mapwidth = 6;
-mapheight = 6;
+mapwidth = 101;
+mapheight = 101;
 randomStart = randi([1 mapwidth], 1, 2);
 hold all;
 grid on;
