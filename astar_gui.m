@@ -191,7 +191,7 @@ diagram(goalX,goalY) = 0;
 plot(handles.mapPlot, goalX, goalY, 'go')
 
 tstart = tic;
-repeated_forward(startX, startY, goalX, goalY, diagram, handles.mapPlot)
+repeated_forward(startY, startX, goalY, goalX, diagram, handles.mapPlot)
 tElapsed = toc(tstart);
 set(handles.timereporter, 'String', tElapsed);
 
@@ -226,7 +226,7 @@ diagram(goalX,goalY) = 0;
 plot(handles.mapPlot, goalX, goalY, 'go')
 
 tstart = tic;
-repeated_forward(goalX, goalY,startX, startY, diagram, handles.mapPlot)
+repeated_forward(goalY,goalX, startY, startX, diagram, handles.mapPlot)
 tElapsed = toc(tstart);
 set(handles.timereporter, 'String', tElapsed);
 
@@ -288,6 +288,7 @@ grid on;
 axis(handles.mapPlot, [1 mapwidth 1 mapheight])
 set(handles.mapPlot, 'XTick', (1:mapwidth), 'YTick', (1:mapheight))
 diagram = csvread(filename);
-imagesc(handles.mapPlot,flipud(diagram));
+diagram = flipud(diagram);
+imagesc(handles.mapPlot,diagram);
 
 

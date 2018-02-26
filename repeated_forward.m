@@ -1,7 +1,7 @@
 function [] = repeated_forward(xStart, yStart, xTarget, yTarget, diagram, plotName)
 
 OPEN = [];
-
+diagram
 % CLOSED LIST STRUCTURE
 % Xval | Yval
 diag_size = size(diagram);
@@ -19,7 +19,7 @@ for i = 1:diag_size(1)
     end
 end
 
-CLOSED_COUNT = size(CLOSED,1)
+CLOSED_COUNT = size(CLOSED,1);
 
 % set the starting node as the first node
 
@@ -131,7 +131,7 @@ if ((xval == xTarget) && (yval == yTarget))
     
     %Plot the optimal path
  Optimal_path = [xTarget yTarget; Optimal_path]
- plot(plotName,Optimal_path(:,1),Optimal_path(:,2), 'b-');
+ plot(plotName,Optimal_path(:,2),Optimal_path(:,1), 'b-');
  axis([1 diag_size(1) 1 diag_size(2)])
 else
      pause(1);
