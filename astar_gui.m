@@ -22,7 +22,7 @@ function varargout = astar_gui(varargin)
 
 % Edit the above text to modify the response to help astar_gui
 
-% Last Modified by GUIDE v2.5 26-Feb-2018 01:10:27
+% Last Modified by GUIDE v2.5 26-Feb-2018 15:05:03
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -188,9 +188,14 @@ hold all;
 goalX = str2double(get(handles.x2, 'String'));
 goalY = str2double(get(handles.y2, 'String'));
 diagram(goalX,goalY) = 0;
-plot(handles.mapPlot, goalX, goalY, 'ro')
+plot(handles.mapPlot, goalX, goalY, 'go')
 
+tstart = tic;
 repeated_forward(startX, startY, goalX, goalY, diagram, handles.mapPlot)
+tElapsed = toc(tstart);
+set(handles.timereporter, 'String', tElapsed);
+
+
 %row, col; row, col; map
 
 
@@ -217,9 +222,13 @@ hold all;
 goalX = str2double(get(handles.x2, 'String'));
 goalY = str2double(get(handles.y2, 'String'));
 diagram(goalX,goalY) = 0;
-plot(handles.mapPlot, goalX, goalY, 'ro')
+plot(handles.mapPlot, goalX, goalY, 'go')
 
+tstart = tic;
 repeated_forward(goalX, goalY,startX, startY, diagram, handles.mapPlot)
+tElapsed = toc(tstart);
+set(handles.timereporter, 'String', tElapsed);
+
 
 % --- Executes on button press in adapted.
 function adapted_Callback(hObject, eventdata, handles)
@@ -238,9 +247,13 @@ hold all;
 goalX = str2double(get(handles.x2, 'String'));
 goalY = str2double(get(handles.y2, 'String'));
 diagram(goalX,goalY) = 0;
-plot(handles.mapPlot, goalX, goalY, 'ro')
+plot(handles.mapPlot, goalX, goalY, 'go')
 
+tstart = tic;
 repeated_forward(goalX, goalY,startX, startY, diagram, handles.mapPlot)
+tElapsed = toc(tstart);
+set(handles.timereporter, 'String', tElapsed);
+
 
 
 % --- Executes on button press in loadmap.
@@ -267,5 +280,3 @@ function clearmap_Callback(hObject, eventdata, handles)
 diagram = [];
 hold off;
 plot(handles.mapPlot, 2.5,2.5,'w.');
-
-

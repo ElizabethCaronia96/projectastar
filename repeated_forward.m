@@ -30,7 +30,7 @@ OPEN_COUNT = 1;
 path_cost = 0;
 
 goal_distance = distance(xNode, yNode, xTarget, yTarget);
-OPEN(OPEN_COUNT,:) = insert_open(xNode, yNode, xNode, yNode, path_cost, goal_distance, goal_distance);
+OPEN(OPEN_COUNT,:) = expand_node(xNode, yNode, xNode, yNode, path_cost, goal_distance, goal_distance);
 OPEN(OPEN_COUNT,1) = 0;
 CLOSED_COUNT = CLOSED_COUNT + 1;
 CLOSED(CLOSED_COUNT,1) = xNode;
@@ -44,8 +44,15 @@ while ((xNode ~= xTarget || yNode ~= yTarget) && NoPath == 1)
     exp_array = expand_array(xNode, yNode, path_cost, xTarget, yTarget, CLOSED, diag_size(1), diag_size(2));
     exp_count = size(exp_array,1);
     
-    %UPDATE OPEN LIST WITH SUCCESSOR NODES
-    
+   %UPDATE LIST OPEN WITH THE SUCCESSOR NODES
+ %OPEN LIST FORMAT
+ %--------------------------------------------------------------------------
+ %IS ON LIST 1/0 |X val |Y val |Parent X val |Parent Y val |h(n) |g(n)|f(n)|
+ %--------------------------------------------------------------------------
+ %EXPANDED ARRAY FORMAT
+ %--------------------------------
+ %|X val |Y val ||h(n) |g(n)|f(n)|
+ %--------------------------------
     for i = 1:exp_count
         flag = 0;
         for j = 1: OPEN_COUNT
@@ -66,7 +73,7 @@ while ((xNode ~= xTarget || yNode ~= yTarget) && NoPath == 1)
         end
         if (flag == 0)
             OPEN_COUNT = OPEN_COUNT + 1;
-            OPEN(OPEN_COUNT, :) = insert_open(exp_array(i,1), exp_array(i, 2), xNode, yNode, exp_array(i,3), exp_array(i,4), exp_array(i, 5));
+            OPEN(OPEN_COUNT, :) = expand_node(exp_array(i,1), exp_array(i, 2), xNode, yNode, exp_array(i,3), exp_array(i,4), exp_array(i, 5));
         end
     end
     
@@ -123,19 +130,13 @@ if ((xval == xTarget) && (yval == yTarget))
     j = size(Optimal_path,1);
     
     %Plot the optimal path
-    p=plot(plotName, Optimal_path(j,1),Optimal_path(j,2),'bo');
-    xopt = Optimal_path(j,1), yopt = Optimal_path(j,2)
- j=j-1;
- for i=j:-1:1
-  pause(.25);
-  set(p,'XData',Optimal_path(i,1),'YData',Optimal_path(i,2));
- drawnow ;
- end
- plot(plotName,Optimal_path(:,1)+.5,Optimal_path(:,2)+.5);
+ Optimal_path = [xTarget yTarget; Optimal_path]
+ plot(plotName,Optimal_path(:,1),Optimal_path(:,2), 'b-');
  axis([1 6 1 6])
 else
- pause(1);
- h=msgbox('Sorry, No path exists to the Target!','warn');
- uiwait(h,5);
+     pause(1);
+     h=msgbox('Sorry, No path exists to the Target!','warn');
+     uiwait(h,5);
+end
 end
     

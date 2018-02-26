@@ -1,4 +1,4 @@
-function [ new_row ] = insert_open( xval, yval, parent_xval, parent_yval, hn, gn, fn )
+function [ new_row ] = expand_node( xval, yval, parent_xval, parent_yval, hn, gn, fn )
 % Function to populate the open list
 
 new_row = [1,8];
