@@ -177,7 +177,7 @@ function forward_Callback(hObject, eventdata, handles)
 %end
 %plot(handles.mapPlot, valCols,keyRows,  'ko')
 global diagram
-disp(diagram)
+%disp(diagram)
 startX = str2double(get(handles.x1, 'String'));
 startY = str2double(get(handles.y1, 'String'));
 diagram(startY, startX) = 2;
@@ -212,7 +212,8 @@ function repeatedback_Callback(hObject, eventdata, handles)
 % hObject    handle to repeatedback (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-
+global diagram
+%disp(diagram)
 startX = str2double(get(handles.x1, 'String'));
 startY = str2double(get(handles.y1, 'String'));
 diagram(startY, startX) = 2;
@@ -236,7 +237,7 @@ function adapted_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-
+global diagram
 startX = str2double(get(handles.x1, 'String'));
 startY = str2double(get(handles.y1, 'String'));
 diagram(startY, startX) = 2;
@@ -267,6 +268,7 @@ function clearmap_Callback(hObject, eventdata, handles)
 % hObject    handle to clearmap (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
+global diagram
 diagram = [];
 hold off;
 plot(handles.mapPlot, 2.5,2.5,'w.');
