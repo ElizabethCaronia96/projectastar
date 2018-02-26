@@ -1,4 +1,4 @@
-function [ Optimal_path, alert ] = search( MAP, xStart, yStart, xTarget, yTarget )
+function [ Optimal_path, alert, nodesExpanded ] = search( MAP, xStart, yStart, xTarget, yTarget, g_flag )
 % Given a grid world and locations of target and agent, find solution
 
 MAX_X = length(MAP);
@@ -51,10 +51,12 @@ CLOSED(CLOSED_COUNT,2) = yNode;
 NoPath = 1;
 
 %% Begin algorithm
+nodesExpanded = 0;
 
 while ((xNode ~= xTarget || yNode ~= yTarget) && NoPath == 1)
     exp_array = expand_array(xNode, yNode, path_cost, xTarget, yTarget, CLOSED, MAX_X, MAX_Y);
     exp_count = size(exp_array,1);
+    nodesExpanded = nodesExpanded + 1;
     
     %UPDATE OPEN LIST WITH SUCCESSOR NODES
     
@@ -84,11 +86,11 @@ while ((xNode ~= xTarget || yNode ~= yTarget) && NoPath == 1)
     
     
     % Find minimum from OPEN list
-    index_min_node = min_fn(OPEN, OPEN_COUNT, xTarget, yTarget);
+    index_min_node = min_fn(OPEN, OPEN_COUNT, xTarget, yTarget, g_flag);
     if (index_min_node ~= -1)
         xNode = OPEN(index_min_node, 2);
         yNode = OPEN(index_min_node, 3);
-        path_cost = OPEN(index_min_node, 6)
+        path_cost = OPEN(index_min_node, 6);
         
         %Move node to the list of closed nodes
         CLOSED_COUNT = CLOSED_COUNT + 1;
