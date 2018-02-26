@@ -1,29 +1,46 @@
-function [] = repeated_forward(sX, sY, gX, gY, diagram, plotName)
-%just an example of how to plot a point on the gui
-plot(plotName, 2, 2, 'go');
-    disp('here');
+function [] = repeated_forward(xStart, yStart, xTarget, yTarget, diagram, plotName)
+%% List Setup
 
+% OPEN List structure
+% IS ON LIST 1/0 | Xval | Yval | Parent Xval | Parent Yval | h(n) | g(n) |
+% f(n)
+MAX_VAL = 6;
+MAX_X = MAX_VAL, MAX_Y  =MAX_VAL;
+MAP = diagram;
+OPEN = [];
 
-%open list properties
-%=x;y;parent x; parent y; h(n); g(n);
-open = [];
-%closed list structure
-%=x;y
-closed = [];
-diagram_size = size(diagram);
-%%
+% CLOSED LIST STRUCTURE
+% Xval | Yval
+
+CLOSED = zeros(MAX_VAL,2);
+
+% put all obstacles in the closed list
 k = 1;
-for i = 1: diagram_size(1)
-    for j = 1: diagram_size(2)
-        if(diagram(i,j) == -1) %wall
-            closed(k,1) = i;
-            closed(k,2) = j;
+for i = 1:MAX_X
+    for j = 1:MAX_Y
+        if (MAP(i,j) == -1)
+            CLOSED(k,1) = i;
+            CLOSED(k,2) = j;
             k = k+1;
         end
     end
 end
-%replace with if val == -1 add to closed ow move on
-%%
-%while((sX ~= gX || sY ~= gY) && NoPath ==1)
-    
-            
+
+CLOSED_COUNT = size(CLOSED,1);
+
+% set the starting node as the first node
+
+xNode = xStart;
+yNode = yStart;
+
+OPEN_COUNT = 1;
+path_cost = 0;
+
+goal_distance = distance(xNode, yNode, xTarget, yTarget);
+OPEN(OPEN_COUNT,:) = insert_open(xNode, yNode, xNode, yNode, path_cost, goal_distance, goal_distance);
+OPEN(OPEN_COUNT,1) = 0;
+CLOSED_COUNT = CLOSED_COUNT + 1;
+CLOSED(CLOSED_COUNT,1) = xNode;
+CLOSED(CLOSED_COUNT,2) = yNode;
+
+NoPath = 1;

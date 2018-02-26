@@ -1,5 +1,5 @@
-function [diagram] = my_dfs_load(sX, sY, plotName, ma)
-diagram = zeros(6,6);
+function [diagram] = my_dfs_load(sX, sY, plotName, mapwidth, mapheight)
+diagram = zeros(mapheight, mapwidth);
     % Set starting node as current node and add it in to stack and visited list
     current(1) = sX;
     current(2) = sY;
