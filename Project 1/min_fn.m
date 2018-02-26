@@ -1,4 +1,4 @@
-function [ i_min ] = min_fn( OPEN, OPEN_COUNT, xTarget, yTarget )
+function [ i_min ] = min_fn( OPEN, OPEN_COUNT, xTarget, yTarget, g_flag )
 % Takes the list of OPEN nodes and returns the index of the node with the
 % least cost
 
@@ -24,10 +24,30 @@ end
 
 %otherwise send the minimum cost node
 if (size(temp_array ~= 0))
-    [min_fn, temp_min] = min(temp_array(:,8))
-    i_min = temp_array(temp_min,9)
+    [min_fn, temp_min] = min(temp_array(:,8));
+    mins = [];
+    k = 1;
+    
+    len = length(temp_array(:,1));
+    
+    for i = 1:length(temp_array(:,1))
+        if temp_array(i,8) == min_fn
+            temp = temp_array(i,:);
+            mins(k,:) = temp_array(i,:);
+            k = k+1;
+        end
+    end
+    
+    if (g_flag == 0)
+    
+        [min_fn, temp_min] = min(mins(:,7));
+    else
+        [min_fn, temp_min] = max(mins(:,7));
+    end
+          
+    i_min = temp_array(temp_min,9);
 else 
-    i_min = -1 % no more paths are available
+    i_min = -1; % no more paths are available
 end
 
 

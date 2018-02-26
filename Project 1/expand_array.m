@@ -6,7 +6,7 @@ function [ exp_array ] = expand_array( node_x, node_y, hn, xTarget, yTarget, CLO
 exp_array = [];
 exp_count = 1;
 
-c2 = size(CLOSED,1) % number of elements in CLOSED including the zeros
+c2 = size(CLOSED,1); % number of elements in CLOSED including the zeros
 for k = 1:-1:-1
     for j = 1:-1:-1
         if (k ~= j || k ~= 0)
