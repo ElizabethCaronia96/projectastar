@@ -22,7 +22,7 @@ function varargout = astar_gui(varargin)
 
 % Edit the above text to modify the response to help astar_gui
 
-% Last Modified by GUIDE v2.5 26-Feb-2018 15:05:03
+% Last Modified by GUIDE v2.5 26-Feb-2018 17:37:13
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -261,16 +261,6 @@ function loadmap_Callback(hObject, eventdata, handles)
 % hObject    handle to loadmap (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-global diagram
-mapwidth = 101;
-mapheight = 101;
-randomStart = randi([1 mapwidth], 1, 2);
-hold all;
-grid on;
-axis(handles.mapPlot, [1 mapwidth 1 mapheight])
-set(handles.mapPlot, 'XTick', (1:mapwidth), 'YTick', (1:mapheight))
-diagram = my_dfs_load(randomStart(1),randomStart(2),handles.mapPlot, mapwidth, mapheight);
-
 
 % --- Executes on button press in clearmap.
 function clearmap_Callback(hObject, eventdata, handles)
@@ -280,3 +270,22 @@ function clearmap_Callback(hObject, eventdata, handles)
 diagram = [];
 hold off;
 plot(handles.mapPlot, 2.5,2.5,'w.');
+
+
+% --- Executes on button press in pushbutton12.
+function pushbutton12_Callback(hObject, eventdata, handles)
+% hObject    handle to pushbutton12 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+global diagram
+mapwidth = 101;
+mapheight = 101;
+filename = ['maps/loadmap_',get(handles.loadmap, 'String'),'.dat']
+hold all;
+grid on;
+axis(handles.mapPlot, [1 mapwidth 1 mapheight])
+set(handles.mapPlot, 'XTick', (1:mapwidth), 'YTick', (1:mapheight))
+diagram = csvread(filename);
+imagesc(handles.mapPlot,diagram);
+
+
