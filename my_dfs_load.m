@@ -29,7 +29,7 @@ while(~isempty(current))
     if (newchildfound ==0)
         l =size(stack);
         if(l(2)>0)
-                popedItem = stack(:,1);
+                stack(:,1);
                 stack(:,1) = [];
         end
         l =size(stack);  

@@ -1,28 +1,5 @@
 function varargout = astar_gui(varargin)
-% ASTAR_GUI MATLAB code for astar_gui.fig
-%      ASTAR_GUI, by itself, creates a new ASTAR_GUI or raises the existing
-%      singleton*.
 %
-%      H = ASTAR_GUI returns the handle to a new ASTAR_GUI or the handle to
-%      the existing singleton*.
-%
-%      ASTAR_GUI('CALLBACK',hObject,eventData,handles,...) calls the local
-%      function named CALLBACK in ASTAR_GUI.M with the given input arguments.
-%
-%      ASTAR_GUI('Property','Value',...) creates a new ASTAR_GUI or raises the
-%      existing singleton*.  Starting from the left, property value pairs are
-%      applied to the GUI before astar_gui_OpeningFcn gets called.  An
-%      unrecognized property name or invalid value makes property application
-%      stop.  All inputs are passed to astar_gui_OpeningFcn via varargin.
-%
-%      *See GUI Options on GUIDE's Tools menu.  Choose "GUI allows only one
-%      instance to run (singleton)".
-%
-% See also: GUIDE, GUIDATA, GUIHANDLES
-
-% Edit the above text to modify the response to help astar_gui
-
-% Last Modified by GUIDE v2.5 26-Feb-2018 17:37:13
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -177,7 +154,6 @@ function forward_Callback(hObject, eventdata, handles)
 %end
 %plot(handles.mapPlot, valCols,keyRows,  'ko')
 global diagram
-disp(diagram)
 startX = str2double(get(handles.x1, 'String'));
 startY = str2double(get(handles.y1, 'String'));
 diagram(startY, startX) = 2;

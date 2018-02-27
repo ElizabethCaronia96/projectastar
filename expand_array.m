@@ -1,4 +1,4 @@
-function [ exp_array ] = expand_array( node_x, node_y, hn, xTarget, yTarget, CLOSED, MAX_X, MAX_Y )
+function [ exp_array ] = expand_array( node_x, node_y, gn, xTarget, yTarget, CLOSED, MAX_X, MAX_Y )
 % Takes a node and returns the expanded list of successors, with the
 % calculated fn values
 % None of the successors may belong to the CLOSED list
@@ -6,7 +6,7 @@ function [ exp_array ] = expand_array( node_x, node_y, hn, xTarget, yTarget, CLO
 exp_array = [];
 exp_count = 1;
 
-c2 = size(CLOSED,1) % number of elements in CLOSED including the zeros
+c2 = size(CLOSED,1); % number of elements in CLOSED including the zeros
 for k = 1:-1:-1
     for j = 1:-1:-1
         if (k ~= j || k ~= 0)
@@ -28,7 +28,7 @@ for k = 1:-1:-1
                 if (flag == 1)
                     exp_array(exp_count, 1) = s_x;
                     exp_array(exp_count, 2) = s_y;
-                    exp_array(exp_count, 3) = hn + distance(node_x, node_y, s_x, s_y);
+                    exp_array(exp_count, 3) = gn + distance(node_x, node_y, s_x, s_y);
                     exp_array(exp_count, 4) = distance(xTarget, yTarget, s_x, s_y);
                     exp_array(exp_count, 5) = exp_array(exp_count, 3) + exp_array(exp_count, 4);
                     exp_count = exp_count + 1;
