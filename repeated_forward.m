@@ -1,7 +1,7 @@
 function [] = repeated_forward(xStart, yStart, xTarget, yTarget, diagram, plotName)
 
 OPEN = [];
-diagram
+
 % CLOSED LIST STRUCTURE
 % Xval | Yval
 diag_size = size(diagram);
